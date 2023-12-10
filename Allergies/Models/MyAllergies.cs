@@ -113,6 +113,8 @@ namespace Allergies.Models
         // {
         //     return _arrayAllergen;
         // }
+
+        // TO use Dictionaries, use the below code here and in the UI logic
         
 /*
         public string DetermineAllergen(int score)
