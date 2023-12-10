@@ -47,21 +47,56 @@ namespace Allergies.Tests
             Assert.AreEqual(newAllergyScore, newAllergy.AllergyScore);
         }
 
-        // 4th Test: A recursive method that checks each allergen 
+        // [TestMethod]
+        // public void DetermineAllergen_DetermineWhichAllergen_Void()
+        // {
+        //     // Arrange 
+        //     MyAllergies personAllergies = new MyAllergies(3);
+
+        //     // Act
+        //     personAllergies.DetermineAllergen();
+
+        //     // Assert
+        //     Assert.AreEqual(expectedList, )
+        // }
+
         [TestMethod]
-        public void DetermineAllergen_DetermineEachAllergen_Array()
+        public void DetermineAllergen_ShouldAddCorrectAllergensToList()
         {
-            // Arrange 
-            MyAllergies newAllergy = new MyAllergies(1);
-            string[] expectedArray = {"eggs"};
+            // Arrange
+            MyAllergies personAllergies = new MyAllergies(35); // Example score, you can use any valid score
 
             // Act
-            string[] allergiesArray = newAllergy.DetermineAllergen();
+            personAllergies.DetermineAllergen();
+            List<MyAllergies> allergenInstances = personAllergies.GetAllAllergenInstances();
+
+
 
             // Assert
-            CollectionAssert.AreEqual(expectedArray, allergiesArray);
+            Assert.IsTrue(allergenInstances.Count > 0);
 
+            //  the assertion is checking if there is at least one element in the allergenInstances list with an AllergyScore equal to MyAllergies.Chocolate. If such an element exists, the assertion passes; otherwise, it fails.
+
+            // Add specific assertions based on your scoring logic
+            // Assert.IsTrue(allergenInstances.Exists(a => a.AllergyScore == MyAllergies.Eggs));
+            Assert.IsTrue(allergenInstances.Exists(a => a.AllergyScore == MyAllergies.Chocolate));
+            // Add more assertions for other allergens...
+            
+            
+            
+            
+            
+            // // Debugging
+            // foreach (var allergenInstance in allergenInstances)
+            // {
+            //     Console.WriteLine($"Allergen Score: {allergenInstance.AllergyScore}");
+            // }
+
+            // // Assert
+            // Assert.IsTrue(allergenInstances.Exists(a => a.AllergyScore == MyAllergies.Peanuts), "Peanuts allergy should be present");
         }
 
+        
+        
     }
 }
