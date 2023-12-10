@@ -15,89 +15,96 @@ namespace Allergies.Models
                 chocolate    32
                 pollen       64
                 cats         128
-                
                 */
+               
         // when we run MyAllergies(3)... It should print a list of a person's allergies: which is eggs and peanuts
 
 
-        // Allergen scores
-        public const int Eggs = 1;
-        public const int Peanuts = 2;
-        public const int Shellfish = 4;
-        public const int Strawberries = 8;
-        public const int Tomatoes = 16;
-        public const int Chocolate = 32;
-        public const int Pollen = 64;
-        public const int Cats = 128;
-
         public int AllergyScore { get; set; }
 
-        private static List<MyAllergies> _arrayAllergen = new List<MyAllergies>();
+        private static List<string> _allergyList = new List<string>(){};
 
         // The constructor
         public MyAllergies(int MyAllergyScore)
         {
             AllergyScore = MyAllergyScore;
-            _arrayAllergen.Add(this);
         }
 
-
-        // Determine allergen... This will be a recursive method; I will call it within itself
-        public void DetermineAllergen()
+        public List<string> DetermineAllergen()
         {
-            DetermineAllergenRecursively(AllergyScore);
+            if (AllergyScore == 0)
+            {
+                _allergyList.Add("You have no allergies");
+            }
+            if (AllergyScore >= 128)
+            {
+                _allergyList.Add("cats");
+                _allergyList.Add("pollen");
+                _allergyList.Add("chocolate");
+                _allergyList.Add("tomatoes");
+                _allergyList.Add("strawberries");
+                _allergyList.Add("shellfish");
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 64)
+            {
+                _allergyList.Add("pollen");
+                _allergyList.Add("chocolate");
+                _allergyList.Add("tomatoes");
+                _allergyList.Add("strawberries");
+                _allergyList.Add("shellfish");
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 32)
+            {
+                _allergyList.Add("chocolate");
+                _allergyList.Add("tomatoes");
+                _allergyList.Add("strawberries");
+                _allergyList.Add("shellfish");
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 16)
+            {
+                _allergyList.Add("tomatoes");
+                _allergyList.Add("strawberries");
+                _allergyList.Add("shellfish");
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 8)
+            {
+                _allergyList.Add("strawberries");
+                _allergyList.Add("shellfish");
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 4)
+            {
+                _allergyList.Add("shellfish");
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 2)
+            {
+                _allergyList.Add("peanuts");
+                _allergyList.Add("eggs");
+            }
+            else if (AllergyScore >= 1)
+            {
+                _allergyList.Add("eggs");
+            }
+            return _allergyList;
         }
 
 
-        private void DetermineAllergenRecursively(int remainingScore)
-        {
-            // Check if the remaining score is greater than or equal to a specific allergen score
-            if (remainingScore >= Cats)
-            {
-                _arrayAllergen.Add(new MyAllergies(Cats));
-                remainingScore -= Cats;
-            }
-            else if (remainingScore >= Pollen)
-            {
-                _arrayAllergen.Add(new MyAllergies(Pollen));
-                remainingScore -= Pollen;
-            }
-            else if (remainingScore >= Chocolate)
-            {
-                _arrayAllergen.Add(new MyAllergies(Chocolate));
-                remainingScore -= Chocolate;
-            }
-            else if(remainingScore >= Tomatoes)
-            {
-                _arrayAllergen.Add(new MyAllergies(Tomatoes));
-                remainingScore -= Tomatoes;
-            }
-            else if(remainingScore >= Strawberries)
-            {
-                _arrayAllergen.Add(new MyAllergies(Strawberries));
-                remainingScore -= Strawberries;
-            }
-            else if(remainingScore >= Shellfish)
-            {
-                _arrayAllergen.Add(new MyAllergies(Shellfish));
-                remainingScore -= Shellfish;
-            }
-            else if(remainingScore >= Peanuts)
-            {
-                _arrayAllergen.Add(new MyAllergies(Peanuts));
-                remainingScore -= Peanuts;
-            }
-            else if(remainingScore >= Eggs)
-            {
-                _arrayAllergen.Add(new MyAllergies(Eggs));
-                remainingScore -= Eggs;
-            }
-        }
 
-        public List<MyAllergies> GetAllAllergenInstances()
-        {
-            return _arrayAllergen;
-        }
+
+
+
+
 
         // With the code above: DetermineAllergen method now correctly adds instances of MyAllergies to the _arrayAllergen list based on the provided allergy score 
 
@@ -107,9 +114,34 @@ namespace Allergies.Models
         //     return _arrayAllergen;
         // }
         
+/*
+        public string DetermineAllergen(int score)
+        {
+        Dictionary<int, string> listOfAllergens = new Dictionary<int, string>() {
+            {128, "Cats"},
+            {64, "Pollen"},
+            {32, "Chocolate"},
+            {16, "Tomatoes"},
+            {8, "Strawberries"},
+            {4, "Shellfish"},
+            {2, "Peanuts"},
+            {1, "Egg"}
+        };
 
-
-        
+        List<string> outputList = new List<string> { };
+        foreach (var allergen in listOfAllergens)
+        {
+            // Console.WriteLine(allergen.Key);
+            // Console.WriteLine(allergen.Value);
+            if (score >= allergen.Key)
+            {
+            outputList.Add(allergen.Value);
+            score -= allergen.Key;
+            }
+        }
+        return String.Join(", ", outputList.ToArray());
+        }
+*/
         
 
     }
