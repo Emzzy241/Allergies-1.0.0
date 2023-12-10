@@ -20,6 +20,7 @@ namespace Allergies.Models
             Console.WriteLine();
             
             // Print Allergies list
+            Console.WriteLine("Here is a list of the things you are allergic to");
             List<string> listOfAllergens = allergens.DetermineAllergen();
             foreach (string item in listOfAllergens)
             {
